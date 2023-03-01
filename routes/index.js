@@ -1,6 +1,7 @@
 import express from "express";
 import patientRoute from "./patient.route.js";
 import doctorRoute from "./doctor.route.js";
+import operatorRoute from "./operator.route.js";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const defaultRoutes = [
   {
     path: "/doctor",
     route: doctorRoute,
+  },
+  {
+    path: "/operator",
+    route: operatorRoute,
   },
 ];
 

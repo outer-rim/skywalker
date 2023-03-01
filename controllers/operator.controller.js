@@ -1,19 +1,10 @@
 import catchAsync from "../utils/catchAsync.js";
 import { findUserByEmail } from "../utils/utility.js";
-import { Doctor } from "../models/index.js";
+import { Operator } from "../models/index.js";
 import bcrypt from "bcrypt";
 
-const registerDoctor = catchAsync(async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    address,
-    license,
-    phone,
-    position,
-    specialization,
-  } = req.body;
+const registerOperator = catchAsync(async (req, res) => {
+  const { email, password, name, address, phone, role } = req.body;
 
   const user = await findUserByEmail(email);
   if (user.table) {
@@ -24,17 +15,15 @@ const registerDoctor = catchAsync(async (req, res) => {
 
   const encryptedPassword = await bcrypt.hash(password, 10);
 
-  const doctor = await Doctor.create({
+  const operator = await Operator.create({
     email,
     password: encryptedPassword,
     name,
     address,
     phone,
-    license,
-    position,
-    specialization,
+    role,
   });
-  res.status(200).json({ message: "Doctor Registered", doctor });
+  res.status(200).json({ message: "Operator Registered", operator });
 });
 
-export default { registerDoctor };
+export default { registerOperator };
