@@ -14,8 +14,9 @@ const login = catchAsync(async (req, res) => {
   if (!isPasswordValid) {
     return res.status(401).json({ message: "Invalid Credentials" });
   }
+  console.log(user.table);
   const token = jwt.sign(
-    { id: user.table.id, email: user.table.email, role: user.table.role },
+    { id: user.table.id, email: user.table.email, role: user.type },
     config.jwtSecret,
     {
       expiresIn: "2h",

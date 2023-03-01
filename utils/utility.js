@@ -5,9 +5,9 @@ const findUserByEmail = async (email) => {
     table: null,
     type: null,
   };
-  const oldDoctor = await Doctor.findOne({ where: { email } });
+  const oldDoctor = await Doctor.findOne({ where: { email }, raw: true });
   // const oldPatient = await Patient.findOne({ where: { email } });
-  const oldOperator = await Operator.findOne({ where: { email } });
+  const oldOperator = await Operator.findOne({ where: { email }, raw: true });
 
   if (oldDoctor) {
     user.table = oldDoctor;
@@ -22,4 +22,16 @@ const findUserByEmail = async (email) => {
   return user;
 };
 
-export { findUserByEmail };
+function extractToken(req) {
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.split(" ")[0] === "Bearer"
+  ) {
+    return req.headers.authorization.split(" ")[1];
+  } else if (req.query && req.query.token) {
+    return req.query.token;
+  }
+  return null;
+}
+
+export { findUserByEmail, extractToken };
