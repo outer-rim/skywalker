@@ -24,4 +24,31 @@ const verifyToken = (req, res, next) => {
   return next();
 };
 
-export default verifyToken;
+const verifyTokenAndAuthorization = (roleList) => {
+  return (req, res, next) => {
+    const extractedToken = extractToken(req);
+    const token =
+      req.body.token ||
+      req.query.token ||
+      req.headers["x-access-token"] ||
+      extractedToken;
+
+    if (!token) {
+      return res.status(403).send("token is required for authentication");
+    }
+    try {
+      console.log(token);
+      const decoded = jwt.verify(token, config.jwtSecret);
+      console.log(decoded);
+      req.user = decoded;
+      if (!roleList.includes(req.user.role)) {
+        return res.status(403).send("You are not allowed to access this route");
+      }
+    } catch (err) {
+      return res.status(401).send("Invalid Token");
+    }
+    next();
+  };
+};
+
+export { verifyToken, verifyTokenAndAuthorization };

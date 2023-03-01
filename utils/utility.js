@@ -22,7 +22,7 @@ const findUserByEmail = async (email) => {
   return user;
 };
 
-function extractToken(req) {
+const extractToken = (req) => {
   if (
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "Bearer"
@@ -32,6 +32,6 @@ function extractToken(req) {
     return req.query.token;
   }
   return null;
-}
+};
 
 export { findUserByEmail, extractToken };

@@ -1,8 +1,12 @@
 import express from "express";
 import controllers from "../controllers/patient.controller.js";
-import verifyToken from "../middleware/auth.js";
+import { verifyTokenAndAuthorization } from "../middleware/auth.js";
 const router = express.Router();
 
-router.get("/list", verifyToken, controllers.getAllPatients);
+router.get(
+  "/list",
+  verifyTokenAndAuthorization(["doctor"]),
+  controllers.getAllPatients
+);
 
 export default router;
