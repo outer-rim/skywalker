@@ -1,6 +1,7 @@
 import catchAsync from "../utils/catchAsync.js";
 import { findUserByEmail } from "../utils/utility.js";
-import { Doctor } from "../models";
+import { Doctor } from "../models/index.js";
+import bcrypt from "bcrypt";
 
 const registerDoctor = catchAsync(async (req, res) => {
   const { name, email, password, license, phone, specialization } = req.body;

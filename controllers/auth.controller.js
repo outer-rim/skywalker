@@ -15,7 +15,7 @@ const login = catchAsync(async (req, res) => {
     return res.status(401).json({ message: "Invalid Credentials" });
   }
   const token = jwt.sign(
-    { id: user.table.id, email: user.table.email },
+    { id: user.table.id, email: user.table.email, role: user.table.role },
     config.jwtSecret,
     {
       expiresIn: "2h",

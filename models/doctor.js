@@ -7,6 +7,7 @@ export function DoctorModel(sequelize, DataTypes) {
         autoIncrement: true,
         primaryKey: true,
       },
+      email: DataTypes.STRING,
       password: DataTypes.STRING,
       name: DataTypes.STRING,
       address: DataTypes.STRING,

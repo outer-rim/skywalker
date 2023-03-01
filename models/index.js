@@ -16,7 +16,7 @@ const Patient = PatientModel(sequelize, Sequelize);
 const Doctor = DoctorModel(sequelize, Sequelize);
 const Operator = OperatorModel(sequelize, Sequelize);
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ alter: false }).then(() => {
   logger.info("db and tables have been created");
 });
 

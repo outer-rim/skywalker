@@ -8,6 +8,7 @@ export function OperatorModel(sequelize, DataTypes) {
         primaryKey: true,
       },
       password: DataTypes.STRING,
+      email: DataTypes.STRING,
       name: DataTypes.STRING,
       address: DataTypes.STRING,
       phone: DataTypes.STRING,
