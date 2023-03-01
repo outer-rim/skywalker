@@ -1,20 +1,23 @@
-export function PatientModel(sequelize, DataTypes) {
+export function OperatorModel(sequelize, DataTypes) {
   return sequelize.define(
-    "PATIENT",
+    "OPERATOR",
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
+      password: DataTypes.STRING,
       name: DataTypes.STRING,
       address: DataTypes.STRING,
-      gender: DataTypes.STRING,
-      age: DataTypes.INTEGER,
       phone: DataTypes.STRING,
+      role: {
+        type: DataTypes.ENUM,
+        values: ["data_entry", "front_desk"],
+      },
     },
     {
-      tableName: "patient",
+      tableName: "operator",
       timestamps: false,
     }
   );
