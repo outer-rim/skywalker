@@ -21,21 +21,22 @@ import { BlockModel } from "./block.js";
 
 const sequelize = new Sequelize(config.db, {
   logging: false,
+  dialect: "postgres",
 });
 
 const Patient = PatientModel(sequelize, Sequelize);
 const Doctor = DoctorModel(sequelize, Sequelize);
 const Operator = OperatorModel(sequelize, Sequelize);
 const Admin = AdminModel(sequelize, Sequelize);
-const Appointment = AppointmentModel(sequelize, Sequelize);
-const Treatment = TreatmentModel(sequelize, Sequelize);
-const Medication = MedicationModel(sequelize, Sequelize);
-const Procedure = ProcedureModel(sequelize, Sequelize);
-const Test = TestModel(sequelize, Sequelize);
+const Block = BlockModel(sequelize, Sequelize);
 const Slot = SlotModel(sequelize, Sequelize);
 const Stay = StayModel(sequelize, Sequelize);
 const Room = RoomModel(sequelize, Sequelize);
-const Block = BlockModel(sequelize, Sequelize);
+const Appointment = AppointmentModel(sequelize, Sequelize);
+const Procedure = ProcedureModel(sequelize, Sequelize);
+const Treatment = TreatmentModel(sequelize, Sequelize);
+const Medication = MedicationModel(sequelize, Sequelize);
+const Test = TestModel(sequelize, Sequelize);
 const Dose = DoseModel(sequelize, Sequelize);
 
 sequelize.sync({ alter: false }).then(() => {

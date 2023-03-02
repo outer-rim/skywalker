@@ -11,21 +11,14 @@ export function RoomModel(sequelize, DataTypes) {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      blockfloor: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "block",
-          key: "floor",
-        },
-      },
-      blockcode: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "block",
-          key: "code",
-        },
-      },
       cost: DataTypes.INTEGER,
+      block_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "block",
+          key: "id",
+        },
+      },
     },
     {
       tableName: "room",

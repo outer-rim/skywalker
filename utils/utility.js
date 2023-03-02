@@ -1,4 +1,4 @@
-import { Doctor, Patient, Operator } from "../models/index.js";
+import { Doctor, Operator, Admin } from "../models/index.js";
 
 const findUserByEmail = async (email) => {
   let user = {
@@ -6,15 +6,15 @@ const findUserByEmail = async (email) => {
     type: null,
   };
   const oldDoctor = await Doctor.findOne({ where: { email }, raw: true });
-  // const oldPatient = await Patient.findOne({ where: { email } });
+  const oldAdmin = await Admin.findOne({ where: { email }, raw: true });
   const oldOperator = await Operator.findOne({ where: { email }, raw: true });
 
   if (oldDoctor) {
     user.table = oldDoctor;
     user.type = "doctor";
-    // } else if (oldPatient) {
-    // user.table = oldPatient;
-    // user.type = "patient";
+  } else if (oldAdmin) {
+    user.table = oldAdmin;
+    user.type = "admin";
   } else if (oldOperator) {
     user.table = oldOperator;
     user.type = "operator";
