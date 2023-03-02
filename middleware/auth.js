@@ -11,7 +11,9 @@ const verifyToken = (req, res, next) => {
     extractedToken;
 
   if (!token) {
-    return res.status(403).send("token is required for authentication");
+    return res
+      .status(403)
+      .json({ message: "token is required for authentication" });
   }
   try {
     console.log(token);
@@ -19,7 +21,7 @@ const verifyToken = (req, res, next) => {
     console.log(decoded);
     req.user = decoded;
   } catch (err) {
-    return res.status(401).send("Invalid Token");
+    return res.status(401).json({ message: "Invalid Token" });
   }
   return next();
 };
@@ -34,19 +36,25 @@ const verifyTokenAndAuthorization = (roleList) => {
       extractedToken;
 
     if (!token) {
-      return res.status(403).send("token is required for authentication");
+      return res
+        .status(403)
+        .json({ message: "token is required for authentication" });
     }
     try {
       console.log(token);
       const decoded = jwt.verify(token, config.jwtSecret);
       console.log(decoded);
       req.user = decoded;
+
       if (!roleList.includes(req.user.role)) {
-        return res.status(403).send("You are not allowed to access this route");
+        return res
+          .status(403)
+          .json({ message: "You are not allowed to access this route" });
       }
     } catch (err) {
-      return res.status(401).send("Invalid Token");
+      return res.status(401).json({ message: "Invalid Token" });
     }
+
     next();
   };
 };
