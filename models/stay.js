@@ -22,7 +22,10 @@ export function StayModel(sequelize, DataTypes) {
         },
       },
       starttime: DataTypes.DATE,
-      endtime: DataTypes.DATE,
+      endtime: {
+        type: DataTypes.DATE,
+        defaultValue: null,
+      },
     },
     {
       tableName: "stay",

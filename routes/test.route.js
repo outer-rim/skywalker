@@ -1,24 +1,17 @@
 import express from "express";
-import controllers from "../controllers/appointment.controller.js";
+import controllers from "../controllers/test.controller.js";
 import { verifyTokenAndAuthorization } from "../middleware/auth.js";
 const router = express.Router();
 
 router.post(
   "/create",
   verifyTokenAndAuthorization(["doctor"]),
-  controllers.createAppointment
+  controllers.createTest
 );
-
 router.get(
-  "/list",
+  "/list/patient",
   verifyTokenAndAuthorization(["operator"]),
-  controllers.getAllAppointments
-);
-
-router.get(
-  "/list/doctor",
-  verifyTokenAndAuthorization(["doctor"]),
-  controllers.getDoctorAppointments
+  controllers.getPatientTests
 );
 
 export default router;

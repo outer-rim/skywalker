@@ -20,4 +20,11 @@ const getAllAppointments = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Appointment List", appointments });
 });
 
-export default { createAppointment, getAllAppointments };
+const getDoctorAppointments = catchAsync(async (req, res) => {
+  const appointments = await Appointment.findAll({
+    where: { doctor_id: req.query.id },
+  });
+  res.status(200).json({ message: "Appointment List", appointments });
+});
+
+export default { createAppointment, getAllAppointments, getDoctorAppointments };

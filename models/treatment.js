@@ -44,7 +44,6 @@ export function TreatmentModel(sequelize, DataTypes) {
           key: "id",
         },
       },
-      date: DataTypes.DATE,
     },
     {
       tableName: "treatment",

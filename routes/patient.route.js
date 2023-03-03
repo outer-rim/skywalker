@@ -3,9 +3,15 @@ import controllers from "../controllers/patient.controller.js";
 import { verifyTokenAndAuthorization } from "../middleware/auth.js";
 const router = express.Router();
 
+router.post(
+  "/create",
+  verifyTokenAndAuthorization(["operator"]),
+  controllers.addPatient
+);
+
 router.get(
   "/list",
-  verifyTokenAndAuthorization(["doctor"]),
+  verifyTokenAndAuthorization(["doctor", "operator"]),
   controllers.getAllPatients
 );
 

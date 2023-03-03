@@ -22,6 +22,7 @@ import { BlockModel } from "./block.js";
 const sequelize = new Sequelize(config.db, {
   logging: false,
   dialect: "postgres",
+  query: { raw: true },
 });
 
 const Patient = PatientModel(sequelize, Sequelize);

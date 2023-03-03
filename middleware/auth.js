@@ -46,7 +46,7 @@ const verifyTokenAndAuthorization = (roleList) => {
       console.log(decoded);
       req.user = decoded;
 
-      if (!roleList.includes(req.user.role) || req.user.role !== "admin") {
+      if (!roleList.includes(req.user.role) && req.user.role !== "admin") {
         return res
           .status(403)
           .json({ message: "You are not allowed to access this route" });

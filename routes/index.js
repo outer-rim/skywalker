@@ -3,6 +3,8 @@ import authRoute from "./auth.route.js";
 import patientRoute from "./patient.route.js";
 import doctorRoute from "./doctor.route.js";
 import operatorRoute from "./operator.route.js";
+import appointmentRoute from "./appointment.route.js";
+import testRoute from "./test.route.js";
 
 const router = express.Router();
 
@@ -22,6 +24,14 @@ const defaultRoutes = [
   {
     path: "/operator",
     route: operatorRoute,
+  },
+  {
+    path: "/appointment",
+    route: appointmentRoute,
+  },
+  {
+    path: "/test",
+    route: testRoute,
   },
 ];
 

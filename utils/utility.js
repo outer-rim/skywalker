@@ -5,9 +5,9 @@ const findUserByEmail = async (email) => {
     table: null,
     type: null,
   };
-  const oldDoctor = await Doctor.findOne({ where: { email }, raw: true });
-  const oldAdmin = await Admin.findOne({ where: { email }, raw: true });
-  const oldOperator = await Operator.findOne({ where: { email }, raw: true });
+  const oldDoctor = await Doctor.findOne({ where: { email } });
+  const oldAdmin = await Admin.findOne({ where: { email } });
+  const oldOperator = await Operator.findOne({ where: { email } });
 
   if (oldDoctor) {
     user.table = oldDoctor;
