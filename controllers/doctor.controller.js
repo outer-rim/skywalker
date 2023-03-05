@@ -37,4 +37,9 @@ const registerDoctor = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Doctor Registered", doctor });
 });
 
-export default { registerDoctor };
+const getAllDoctors = catchAsync(async (req, res) => {
+  const doctors = await Doctor.findAll({});
+  res.status(200).json({ doctors });
+});
+
+export default { registerDoctor, getAllDoctors };

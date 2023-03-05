@@ -1,5 +1,6 @@
 import express from "express";
 import authRoute from "./auth.route.js";
+import adminRoute from "./admin.route.js";
 import patientRoute from "./patient.route.js";
 import doctorRoute from "./doctor.route.js";
 import operatorRoute from "./operator.route.js";
@@ -13,6 +14,10 @@ const defaultRoutes = [
   {
     path: "/auth",
     route: authRoute,
+  },
+  {
+    path: "/admin",
+    route: adminRoute,
   },
   {
     path: "/patient",
