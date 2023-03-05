@@ -5,6 +5,7 @@ import doctorRoute from "./doctor.route.js";
 import operatorRoute from "./operator.route.js";
 import appointmentRoute from "./appointment.route.js";
 import testRoute from "./test.route.js";
+import roomRoute from "./room.route.js";
 
 const router = express.Router();
 
@@ -32,6 +33,10 @@ const defaultRoutes = [
   {
     path: "/test",
     route: testRoute,
+  },
+  {
+    path: "/room",
+    route: roomRoute,
   },
 ];
 

@@ -15,6 +15,10 @@ const login = catchAsync(async (req, res) => {
     return res.status(401).json({ message: "Invalid Credentials" });
   }
   console.log(user.table);
+  let role = user.type;
+  if (role === "operator") {
+    role = user.table.role;
+  }
   const token = jwt.sign(
     { id: user.table.id, email: user.table.email, role: user.type },
     config.jwtSecret,
@@ -22,7 +26,18 @@ const login = catchAsync(async (req, res) => {
       expiresIn: "2h",
     }
   );
-  res.status(200).json({ message: "Login Successful", token });
+  res
+    .status(200)
+    .json({ message: "Login Successful", token, role, user: user.table });
 });
 
-export default { login };
+const getDetails = catchAsync(async (req, res) => {
+  const { email } = req.query;
+  const user = await findUserByEmail(email);
+  if (!user.table) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json({ message: "User found", user: user.table });
+});
+
+export default { login, getDetails };

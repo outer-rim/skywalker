@@ -8,6 +8,10 @@ export function RoomModel(sequelize, DataTypes) {
       },
       type: DataTypes.STRING,
       cost: DataTypes.INTEGER,
+      available: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
       block_id: {
         type: DataTypes.INTEGER,
         references: {
