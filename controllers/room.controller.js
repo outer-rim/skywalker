@@ -17,4 +17,4 @@ const getFreeRooms = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Room list", roomList });
 });
 
-export default { getFreeRooms };
+export default { addRoom, getFreeRooms };

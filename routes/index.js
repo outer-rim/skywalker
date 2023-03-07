@@ -7,6 +7,7 @@ import operatorRoute from "./operator.route.js";
 import appointmentRoute from "./appointment.route.js";
 import testRoute from "./test.route.js";
 import roomRoute from "./room.route.js";
+import slotRoute from "./slot.route.js";
 import blockRoute from "./block.route.js";
 import medicationRoute from "./medication.route.js";
 import procedureRoute from "./procedure.route.js";
@@ -64,6 +65,10 @@ const defaultRoutes = [
   {
     path: "/stay",
     route: stayRoute,
+  },
+  {
+    path: "/slot",
+    route: slotRoute,
   },
   {
     path: "/treatment",

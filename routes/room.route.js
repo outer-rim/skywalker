@@ -12,7 +12,7 @@ router.get(
 router.post(
   "/add",
   verifyTokenAndAuthorization(["operator"]),
-  controllers.addRooms
+  controllers.addRoom
 );
 
 export default router;

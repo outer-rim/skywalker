@@ -8,6 +8,13 @@ router.post(
   verifyTokenAndAuthorization(["doctor", "operator"]),
   controllers.createTest
 );
+
+router.post(
+  "/upload",
+  verifyTokenAndAuthorization(["doctor", "operator"]),
+  controllers.uploadTestReport
+);
+
 router.get(
   "/list/patient",
   verifyTokenAndAuthorization(["doctor", "operator"]),

@@ -33,15 +33,22 @@ const login = catchAsync(async (req, res) => {
 
 const verify = catchAsync(async (req, res) => {
   const email = req.user.email;
+  console.log(email);
   const user = await findUserByEmail(email);
+
   if (!user.table) {
     return res.status(404).json({ message: "User not found" });
   }
-  res.status(200).json({ message: "User found", user: user.table });
+
+  let role = user.type;
+  if (role === "operator") {
+    role = user.table.role;
+  }
+  res.status(200).json({ message: "User found", role });
 });
 
 const getDetails = catchAsync(async (req, res) => {
-  const { email } = req.query;
+  const email = req.user.email;
   const user = await findUserByEmail(email);
   if (!user.table) {
     return res.status(404).json({ message: "User not found" });

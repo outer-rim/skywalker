@@ -14,5 +14,5 @@ export default {
     accessKeyId: envVars.AWS_ACCESS_KEY_ID,
     secretAccessKey: envVars.AWS_SECRET_KEY,
   },
-  privateBucket: envVars.PUBLIC_BUCKET,
+  supabaseBucket: envVars.SUPABASE_S3_BUCKET,
 };
