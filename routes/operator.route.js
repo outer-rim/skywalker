@@ -9,4 +9,10 @@ router.post(
   controllers.registerOperator
 );
 
+router.get(
+  "/list",
+  verifyTokenAndAuthorization(["admin"]),
+  controllers.getOperators
+);
+
 export default router;

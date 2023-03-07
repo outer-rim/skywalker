@@ -7,6 +7,8 @@ import operatorRoute from "./operator.route.js";
 import appointmentRoute from "./appointment.route.js";
 import testRoute from "./test.route.js";
 import roomRoute from "./room.route.js";
+import procedureRoute from "./procedure.route.js";
+import medicationRoute from "./medication.route.js";
 
 const router = express.Router();
 
@@ -42,6 +44,14 @@ const defaultRoutes = [
   {
     path: "/room",
     route: roomRoute,
+  },
+  {
+    path: "/procedure",
+    route: procedureRoute,
+  },
+  {
+    path: "/medication",
+    route: medicationRoute,
   },
 ];
 

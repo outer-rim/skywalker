@@ -26,4 +26,14 @@ const registerOperator = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Operator Registered", operator });
 });
 
-export default { registerOperator };
+const getOperators = catchAsync(async (req, res) => {
+  const { id } = req.query;
+  if (id) {
+    const operator = await Operator.findOne({ where: { id } });
+    return res.status(200).json({ operator });
+  }
+  const operators = await Operator.findAll({});
+  res.status(200).json({ operators });
+});
+
+export default { registerOperator, getOperators };

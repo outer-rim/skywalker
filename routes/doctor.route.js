@@ -9,6 +9,6 @@ router.post(
   controllers.registerDoctor
 );
 
-router.get("/list", controllers.getAllDoctors);
+router.get("/list", controllers.getDoctors);
 
 export default router;
