@@ -31,6 +31,15 @@ const login = catchAsync(async (req, res) => {
     .json({ message: "Login Successful", token, role, user: user.table });
 });
 
+const verify = catchAsync(async (req, res) => {
+  const email = req.user.email;
+  const user = await findUserByEmail(email);
+  if (!user.table) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json({ message: "User found", user: user.table });
+});
+
 const getDetails = catchAsync(async (req, res) => {
   const { email } = req.query;
   const user = await findUserByEmail(email);
@@ -40,4 +49,4 @@ const getDetails = catchAsync(async (req, res) => {
   res.status(200).json({ message: "User found", user: user.table });
 });
 
-export default { login, getDetails };
+export default { login, getDetails, verify };

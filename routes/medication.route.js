@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.post(
   "/add",
-  verifyTokenAndAuthorization(["operator"]),
+  verifyTokenAndAuthorization(["operator", "doctor"]),
   controllers.addMedication
 );
 
 router.get(
   "/list",
-  verifyTokenAndAuthorization(["operator"]),
+  verifyTokenAndAuthorization(["operator", "doctor"]),
   controllers.getMedications
 );
 

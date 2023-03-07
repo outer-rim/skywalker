@@ -10,13 +10,13 @@ const verifyToken = (req, res, next) => {
     req.headers["x-access-token"] ||
     extractedToken;
 
+  console.log(token);
   if (!token) {
     return res
       .status(403)
       .json({ message: "token is required for authentication" });
   }
   try {
-    console.log(token);
     const decoded = jwt.verify(token, config.jwtSecret);
     console.log(decoded);
     req.user = decoded;

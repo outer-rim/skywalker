@@ -5,12 +5,12 @@ const router = express.Router();
 
 router.post(
   "/create",
-  verifyTokenAndAuthorization(["doctor"]),
+  verifyTokenAndAuthorization(["doctor", "operator"]),
   controllers.createTest
 );
 router.get(
   "/list/patient",
-  verifyTokenAndAuthorization(["operator"]),
+  verifyTokenAndAuthorization(["doctor", "operator"]),
   controllers.getPatientTests
 );
 

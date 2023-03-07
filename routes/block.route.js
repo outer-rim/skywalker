@@ -1,18 +1,18 @@
 import express from "express";
-import controllers from "../controllers/room.controller.js";
+import controllers from "../controllers/block.controller.js";
 import { verifyTokenAndAuthorization } from "../middleware/auth.js";
 const router = express.Router();
 
 router.get(
   "/list",
-  verifyTokenAndAuthorization(["operator"]),
-  controllers.getFreeRooms
+  verifyTokenAndAuthorization(["admin", "operator", "doctor"]),
+  controllers.getBlocks
 );
 
 router.post(
   "/add",
   verifyTokenAndAuthorization(["operator"]),
-  controllers.addRooms
+  controllers.addBlock
 );
 
 export default router;

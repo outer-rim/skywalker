@@ -7,8 +7,12 @@ import operatorRoute from "./operator.route.js";
 import appointmentRoute from "./appointment.route.js";
 import testRoute from "./test.route.js";
 import roomRoute from "./room.route.js";
-import procedureRoute from "./procedure.route.js";
+import blockRoute from "./block.route.js";
 import medicationRoute from "./medication.route.js";
+import procedureRoute from "./procedure.route.js";
+import stayRoute from "./stay.route.js";
+import treatmentRoute from "./treatment.route.js";
+import doseRoute from "./dose.route.js";
 
 const router = express.Router();
 
@@ -46,12 +50,28 @@ const defaultRoutes = [
     route: roomRoute,
   },
   {
-    path: "/procedure",
-    route: procedureRoute,
+    path: "/block",
+    route: blockRoute,
   },
   {
     path: "/medication",
     route: medicationRoute,
+  },
+  {
+    path: "/procedure",
+    route: procedureRoute,
+  },
+  {
+    path: "/stay",
+    route: stayRoute,
+  },
+  {
+    path: "/treatment",
+    route: treatmentRoute,
+  },
+  {
+    path: "/dose",
+    route: doseRoute,
   },
 ];
 

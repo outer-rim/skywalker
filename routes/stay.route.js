@@ -1,18 +1,18 @@
 import express from "express";
-import controllers from "../controllers/room.controller.js";
+import controllers from "../controllers/stay.controller.js";
 import { verifyTokenAndAuthorization } from "../middleware/auth.js";
 const router = express.Router();
 
-router.get(
-  "/list",
+router.post(
+  "/create",
   verifyTokenAndAuthorization(["operator"]),
-  controllers.getFreeRooms
+  controllers.createStay
 );
 
 router.post(
-  "/add",
+  "/discharge",
   verifyTokenAndAuthorization(["operator"]),
-  controllers.addRooms
+  controllers.dischargeStay
 );
 
 export default router;
