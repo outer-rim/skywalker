@@ -25,6 +25,9 @@ app.use(express.json());
 // parse urlencoded request body
 app.use(express.urlencoded({ extended: true }));
 
+// static files
+app.use(express.static("uploads"));
+
 // sanitize request data
 app.use(xss());
 

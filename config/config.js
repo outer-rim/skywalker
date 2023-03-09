@@ -10,9 +10,7 @@ export default {
   port: envVars.PORT,
   db: envVars.DATABASE_STRING,
   jwtSecret: envVars.JWT_SECRET,
-  awsKeys: {
-    accessKeyId: envVars.AWS_ACCESS_KEY_ID,
-    secretAccessKey: envVars.AWS_SECRET_KEY,
-  },
   supabaseBucket: envVars.SUPABASE_S3_BUCKET,
+  supabaseUrl: envVars.SUPABASE_URL,
+  supabaseKey: envVars.SUPABASE_KEY,
 };

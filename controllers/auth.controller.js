@@ -33,9 +33,7 @@ const login = catchAsync(async (req, res) => {
 
 const verify = catchAsync(async (req, res) => {
   const email = req.user.email;
-  console.log(email);
   const user = await findUserByEmail(email);
-
   if (!user.table) {
     return res.status(404).json({ message: "User not found" });
   }

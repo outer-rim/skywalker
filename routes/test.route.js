@@ -1,6 +1,7 @@
 import express from "express";
 import controllers from "../controllers/test.controller.js";
 import { verifyTokenAndAuthorization } from "../middleware/auth.js";
+import uploadImage from "../middleware/multer.js";
 const router = express.Router();
 
 router.post(
@@ -9,9 +10,12 @@ router.post(
   controllers.createTest
 );
 
-router.post(
+router.put(
   "/upload",
-  verifyTokenAndAuthorization(["doctor", "operator"]),
+  [
+    verifyTokenAndAuthorization(["doctor", "operator"]),
+    uploadImage.single("image"),
+  ],
   controllers.uploadTestReport
 );
 

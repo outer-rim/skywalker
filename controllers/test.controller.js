@@ -1,7 +1,8 @@
 import catchAsync from "../utils/catchAsync.js";
 import { Appointment, Test } from "../models/index.js";
 import config from "../config/config.js";
-import supabaseClient from "@supabase/supabase-js";
+import supabaseClient from "../utils/supabase.js";
+import fs from "fs";
 
 const createTest = catchAsync(async (req, res) => {
   const { name, appointment_id, cost, date } = req.body;
@@ -17,22 +18,28 @@ const createTest = catchAsync(async (req, res) => {
 
 const uploadTestReport = catchAsync(async (req, res) => {
   const { id } = req.query;
-  let form = await req.formData();
-  const report = form.get("report");
+  console.log(id);
+  const { file } = req;
+  const { path } = file;
+  console.log(path);
 
-  if (!test) {
-    return res.status(404).json({ message: "Test not found" });
-  }
-  const { data, error } = await supabaseClient
-    .from(config.supabaseBucket)
-    .insert([{ report }]);
+  // const fileBody = fs.readFileSync(path);
 
-  const test = await Test.update(
-    { report_url: data[0].url },
-    { where: { id } }
-  );
+  // const { data, error } = await supabaseClient.storage
+  //   .from(config.supabaseBucket)
+  //   .upload(path, fileBody.buffer, {
+  //     cacheControl: "3600",
+  //     upsert: false,
+  //   });
 
-  res.status(200).json({ message: "Test Report Uploaded", test });
+  // console.log(data);
+
+  // if (error) {
+  //   console.log(error);
+  //   return res.status(500).json({ message: "Error Uploading Test Report" });
+  // }
+  const test = await Test.update({ file_url: path }, { where: { id } });
+  res.status(200).json({ message: "Test Report Uploaded" });
 });
 
 const getPatientTests = catchAsync(async (req, res) => {
