@@ -17,6 +17,7 @@ router.get(
 
 router.post(
   "/listspec",
+  verifyTokenAndAuthorization(["operator", "doctor"]),
   controllers.getSlotspec
 );
 

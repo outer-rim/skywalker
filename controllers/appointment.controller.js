@@ -1,5 +1,5 @@
 import catchAsync from "../utils/catchAsync.js";
-import { Appointment, Slot } from "../models/index.js";
+import { Appointment, Slot, Patient, Doctor } from "../models/index.js";
 
 const createAppointment = catchAsync(async (req, res) => {
   const { patient_id, doctor_id, slot_id } = req.body;
@@ -20,7 +20,9 @@ const createAppointment = catchAsync(async (req, res) => {
         id: slot.id,
       },
     });
-  res.status(200).json({ message: "Appointment Registered", appointment, slot_id:slot.id });
+    const patient = await Patient.findOne({where:{id: patient_id}});
+    const doctor = await Doctor.findOne({where:{id: doctor_id}});
+  res.status(200).json({ message: "Appointment Registered", appointment:appointment, slot_id:slot.id, patient: patient, doctor:doctor });
 });
 
 const getAllAppointments = catchAsync(async (req, res) => {

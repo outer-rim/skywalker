@@ -2,6 +2,11 @@ export function SlotModel(sequelize, DataTypes) {
   return sequelize.define(
     "SLOT",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+      },
       doctor_id: {
         type: DataTypes.INTEGER,
         references: {

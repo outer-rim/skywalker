@@ -1,5 +1,5 @@
 import catchAsync from "../utils/catchAsync.js";
-import { Slot } from "../models/index.js";
+import { Slot, Doctor } from "../models/index.js";
 import { Sequelize } from "sequelize";
 import { Op } from "sequelize";
 
@@ -12,7 +12,8 @@ const addSlot = catchAsync(async (req, res) => {
     endtime,
     status
   });
-  res.status(200).json({ message: "Slot Added", slot });
+  const doctor = await Doctor.findOne({where:{id: doctor_id}});
+  res.status(200).json({ message: "Slot Added", slot, doctor:doctor });
 });
 
 const getSlots = catchAsync(async (req, res) => {

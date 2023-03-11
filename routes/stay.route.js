@@ -21,4 +21,10 @@ router.get(
   controllers.getAlldischarged
 );
 
+router.get(
+  "/getalladmitted",
+  verifyTokenAndAuthorization(["operator"]),
+  controllers.getAlladmitted
+);
+
 export default router;
