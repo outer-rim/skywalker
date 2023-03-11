@@ -3,10 +3,15 @@ import { Appointment, Slot, Patient, Doctor } from "../models/index.js";
 
 const createAppointment = catchAsync(async (req, res) => {
   const { patient_id, doctor_id, slot_id } = req.body;
-  const slot = await Slot.findOne({where:{id:slot_id}});
+  const slot = await Slot.findOne({where:{id:slot_id, doctor_id}});
   if(!slot)
   {
-    res.status(404).json({error:'slot does not exists'});
+    res.status(404).json({error:'Slot does not exist'});
+  }
+
+  if(!slot.status)
+  {
+    res.status(404).json({error:'Slot is already booked'});
   }
   const appointment = await Appointment.create({
     patient_id,

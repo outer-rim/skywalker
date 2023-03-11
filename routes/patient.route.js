@@ -15,4 +15,27 @@ router.get(
   controllers.getAllPatients
 );
 
+router.get(
+  "/treatmentlist",
+  verifyTokenAndAuthorization(["doctor"]),
+  controllers.getTreatedPatients
+);
+
+router.get(
+  "/appointmentlist",
+  verifyTokenAndAuthorization(["doctor"]),
+  controllers.getAppointmentPatients
+);
+
+router.post(
+  "/getpatient",
+  verifyTokenAndAuthorization(["doctor", "operator"]),
+  controllers.getPatientById
+);
+
+router.post(
+  "/getentirepatient",
+  controllers.getEntirePatientDetails
+);
+
 export default router;
