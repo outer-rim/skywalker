@@ -23,7 +23,7 @@ router.get(
 
 router.get(
   "/getalladmitted",
-  verifyTokenAndAuthorization(["operator"]),
+  verifyTokenAndAuthorization(["operator", "doctor"]),
   controllers.getAlladmitted
 );
 

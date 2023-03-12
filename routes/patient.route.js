@@ -35,7 +35,14 @@ router.post(
 
 router.post(
   "/getentirepatient",
+  verifyTokenAndAuthorization(["doctor", "operator"]),
   controllers.getEntirePatientDetails
+);
+
+router.get(
+  "/getmedicationbytreatment",
+  verifyTokenAndAuthorization(["doctor", "operator"]),
+  controllers.getMedicationByTreatment
 );
 
 export default router;

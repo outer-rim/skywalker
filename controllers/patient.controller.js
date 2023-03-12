@@ -44,7 +44,7 @@ const getTreatedPatients = catchAsync(async (req, res) => {
   const { doctor_id } = req.query;
   const client = new Client(loginfo);
   client.connect();
-  const query = `SELECT patient.id as patient_id, patient.name, treatment.id, treatment.date, procedure.name AS procedure_name, treatment.illness_details from patient, procedure, treatment where treatment.patient_id = patient.id AND treatment.procedure_id = procedure.id AND treatment.doctor_id = ${doctor_id}`;
+  const query = `SELECT patient.id as patient_id, patient.name, treatment.id, treatment.date, procedure.name AS procedure_name, stay.room, treatment.illness_details from patient, procedure, treatment, stay where treatment.patient_id = patient.id AND treatment.stay_id = stay.id AND treatment.procedure_id = procedure.id AND treatment.doctor_id = ${doctor_id}`;
   const data = await client.query(query);
   client.end();
   res.status(200).json({ message: "Patient List", treatments: data.rows });
@@ -62,8 +62,12 @@ const getEntirePatientDetails = catchAsync(async (req, res) => {
 
 const getMedicationByTreatment = catchAsync(async (req, res) => {
   const { id } = req.query;
-  const medic = await Medication.findAll({where: {treatment_id: id}});
-  res.status(200).json({ message: "Medication List", medic });
+  const query = `SELECT medication.name, medication.id, dose.dose_amount, medication.brand, medication.description FROM dose, medication WHERE dose.medication_id = medication.id AND dose.treatment_id = ${id}`
+  const client = new Client(loginfo);
+  client.connect();
+  const data = await client.query(query);
+  client.end();
+  res.status(200).json({ message: "Medication List", medic:data.rows });
 });
 
 const getInvoice = catchAsync(async (req, res) => {

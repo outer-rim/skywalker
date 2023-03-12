@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post(
   "/create",
-  verifyTokenAndAuthorization(["operator"]),
+  verifyTokenAndAuthorization(["operator", "doctor"]),
   controllers.createDose
 );
 

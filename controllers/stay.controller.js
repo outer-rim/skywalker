@@ -71,7 +71,7 @@ const getAlldischarged = catchAsync(async (req, res) => {
 const getAlladmitted = catchAsync(async (req, res) => {
   const client = new Client(loginfo);
   client.connect();
-  const query = 'SELECT patient.id, patient.name, patient.gender, patient.age, patient.phone, stay.starttime, stay.endtime, stay.room FROM stay, patient WHERE stay.patient_id = patient.id';
+  const query = 'SELECT patient.id, patient.name, patient.gender, patient.age, patient.phone, stay.starttime, stay.endtime, stay.room, stay.id AS stay_id FROM stay, patient WHERE stay.patient_id = patient.id';
   const admitted = await client.query(query);
   client.end();
   res.status(200).json({patients:admitted.rows});
