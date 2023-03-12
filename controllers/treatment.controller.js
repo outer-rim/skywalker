@@ -26,6 +26,12 @@ const createTreatment = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Treatment registered", treatment });
 });
 
+const uploadTreatmentReport = catchAsync(async (req, res) => {
+  const {file} = req;
+  const {path} = file;
+  res.status(200).json({ message: "Treatment Report Uploaded", file_url: path });
+});
+
 const getDoctorTreatments = catchAsync(async (req, res) => {
   console.log(req.query.id);
   const treatments = await Treatment.findAll({
@@ -34,4 +40,4 @@ const getDoctorTreatments = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Treatment List", treatments });
 });
 
-export default { createTreatment, getDoctorTreatments };
+export default { createTreatment, getDoctorTreatments, uploadTreatmentReport };
