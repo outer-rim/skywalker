@@ -6,12 +6,13 @@ const { Client } = pg;
 import loginfo from "../config/pg_details.js";
 
 const createTest = catchAsync(async (req, res) => {
-  const { file_url, name, appointment_id, cost, date } = req.body;
+  const { file_url, name, appointment_id, report_status, cost, date } = req.body;
 
   const test = await Test.create({
     file_url,
     name,
     appointment_id,
+    report_status,
     cost,
     date,
   });

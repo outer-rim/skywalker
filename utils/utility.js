@@ -12,6 +12,7 @@ const findUserByEmail = async (email) => {
   if (oldDoctor) {
     user.table = oldDoctor;
     user.type = "doctor";
+    if(!oldDoctor.status) user.table = null;
   } else if (oldAdmin) {
     user.table = oldAdmin;
     user.type = "admin";

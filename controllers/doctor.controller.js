@@ -34,6 +34,7 @@ const registerDoctor = catchAsync(async (req, res) => {
     license,
     position,
     specialization,
+    status
   });
   res.status(200).json({ message: "Doctor Registered", doctor });
 });
@@ -41,10 +42,10 @@ const registerDoctor = catchAsync(async (req, res) => {
 const getDoctors = catchAsync(async (req, res) => {
   const { id } = req.query;
   if (id) {
-    const doctor = await Doctor.findOne({ where: { id } }); // Add the status for removing the deleted ones ', status: true'
+    const doctor = await Doctor.findOne({ where: { id, status: true } }); // Add the status for removing the deleted ones ', status: true'
     return res.status(200).json({ doctor });
   }
-  const doctors = await Doctor.findAll({});
+  const doctors = await Doctor.findAll({where: {status: true}});
   res.status(200).json({ doctors });
 });
 

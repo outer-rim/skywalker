@@ -1,7 +1,7 @@
 const loginfo = {
     user: 'postgres',
     host: '10.147.203.223',
-    database: 'dbms_test',
+    database: 'dbms_final',
     password: '20CS30061',
     port: 5432,
 }
