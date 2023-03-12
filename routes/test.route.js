@@ -10,6 +10,11 @@ router.post(
   controllers.createTest
 );
 
+router.get(
+  "/getalltest",
+  controllers.getAllTest
+);
+
 router.post(
   "/upload",
   [

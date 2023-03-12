@@ -1,5 +1,9 @@
 import catchAsync from "../utils/catchAsync.js";
 import { Appointment, Test } from "../models/index.js";
+import { Sequelize } from "sequelize";
+import pg from 'pg';
+const { Client } = pg;
+import loginfo from "../config/pg_details.js";
 
 const createTest = catchAsync(async (req, res) => {
   const { file_url, name, appointment_id, cost, date } = req.body;
@@ -13,6 +17,15 @@ const createTest = catchAsync(async (req, res) => {
   });
   res.status(200).json({ message: "Test Registered", test });
 });
+
+const getAllTest = catchAsync(async (req, res) => {
+  const client = new Client(loginfo);
+  client.connect();
+  const query = 'SELECT test.name, test.id AS tid, test.date, test.appointment_id, appointment.patient_id AS pid, appointment.doctor_id FROM test, appointment WHERE test.appointment_id = appointment.id';
+  const test =  await client.query(query);
+  await client.end();
+  res.status(200).json({message: "all tests", tests: test.rows});
+})
 
 const uploadTestReport = catchAsync(async (req, res) => {
   const {file} = req;
@@ -32,4 +45,4 @@ const getPatientTests = catchAsync(async (req, res) => {
   res.status(200).json({ message: "Test List", testList });
 });
 
-export default { createTest, getPatientTests, uploadTestReport };
+export default { createTest, getPatientTests, uploadTestReport, getAllTest };
