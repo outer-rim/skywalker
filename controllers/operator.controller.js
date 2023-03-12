@@ -36,4 +36,18 @@ const getOperators = catchAsync(async (req, res) => {
   res.status(200).json({ operators });
 });
 
-export default { registerOperator, getOperators };
+const deleteOperator = catchAsync(async(req, res) => {
+  const Op = await Operator.findOne({where:{id: req.body.id}});
+  if(!Op)
+  {
+    res.status(404).json({message: "Operator does not exist"});
+  }
+  const del = await Operator.destroy({
+    where: {
+      id: req.body.id
+    }
+  });
+  res.status(200).json({message: "deleted successfully"});
+})
+
+export default { registerOperator, getOperators, deleteOperator };

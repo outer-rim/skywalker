@@ -19,6 +19,12 @@ const login = catchAsync(async (req, res) => {
   if (role === "operator") {
     role = user.table.role;
   }
+  // if(role == "doctor")
+  // {
+  //   if(!user.status)
+  //     return res.status(401).json({message: "User Not Found"});
+  // };
+  
   const token = jwt.sign(
     { id: user.table.id, email: user.table.email, role: user.type },
     config.jwtSecret,

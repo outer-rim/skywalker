@@ -15,4 +15,9 @@ router.get(
   controllers.getOperators
 );
 
+router.post("/delete", 
+verifyTokenAndAuthorization(["admin"]),
+controllers.deleteOperator
+);
+
 export default router;

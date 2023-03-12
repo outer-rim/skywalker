@@ -9,6 +9,11 @@ router.post(
   controllers.registerDoctor
 );
 
+router.post("/delete", 
+verifyTokenAndAuthorization(["admin"]),
+controllers.deleteDoctor
+);
+
 router.get("/list", controllers.getDoctors);
 
 export default router;

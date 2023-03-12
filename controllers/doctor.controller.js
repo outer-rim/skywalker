@@ -23,8 +23,9 @@ const registerDoctor = catchAsync(async (req, res) => {
   }
 
   const encryptedPassword = await bcrypt.hash(password, 10);
+  const status = true;
 
-  const doctor = await Doctor.create({
+  const doctor = await Doctor.create({    // Add the status
     email,
     password: encryptedPassword,
     name,
@@ -40,11 +41,26 @@ const registerDoctor = catchAsync(async (req, res) => {
 const getDoctors = catchAsync(async (req, res) => {
   const { id } = req.query;
   if (id) {
-    const doctor = await Doctor.findOne({ where: { id } });
+    const doctor = await Doctor.findOne({ where: { id } }); // Add the status for removing the deleted ones ', status: true'
     return res.status(200).json({ doctor });
   }
   const doctors = await Doctor.findAll({});
   res.status(200).json({ doctors });
 });
 
-export default { registerDoctor, getDoctors };
+const deleteDoctor = catchAsync(async(req, res) => {
+  const Doc = await Doctor.findOne({where:{id: req.body.id}});
+  if(!Doc)
+  {
+    res.status(404).json({message: "Doctor does not exist"});
+  }
+  const del = await Doctor.update({ status: false },
+    {
+      where: {
+        id: req.body.id
+      },
+    });
+  res.status(200).json({message: "deleted successfully"});
+})
+
+export default { registerDoctor, getDoctors, deleteDoctor };

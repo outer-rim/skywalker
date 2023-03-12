@@ -15,6 +15,7 @@ export function DoctorModel(sequelize, DataTypes) {
       license: DataTypes.STRING,
       position: DataTypes.STRING,
       specialization: DataTypes.STRING,
+      // status: DataTypes.BOOLEAN // To be added for doctor delete
     },
     {
       tableName: "doctor",
