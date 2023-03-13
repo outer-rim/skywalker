@@ -37,9 +37,7 @@ const dischargeStay = catchAsync(async (req, res) => {
     },
   });
   const date = new Date();
-  if (!stay) {
-    res.status(404).json({ message: "user not found" });
-  }
+  if(stay){
   const del = await Room.update(
     { available: true },
     {
@@ -57,6 +55,8 @@ const dischargeStay = catchAsync(async (req, res) => {
     }
   );
   res.status(200).json({ message: "Discharged Successfully" });
+  }
+  res.status(404).json({ message: "user not found" });
 });
 
 const getAlldischarged = catchAsync(async (req, res) => {

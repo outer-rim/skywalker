@@ -6,12 +6,12 @@ const createAppointment = catchAsync(async (req, res) => {
   const slot = await Slot.findOne({where:{id:slot_id, doctor_id}});
   if(!slot)
   {
-    res.status(404).json({error:'Slot does not exist'});
+    res.status(404).json({message:'Slot does not exist'});
   }
 
   if(!slot.status)
   {
-    res.status(404).json({error:'Slot is already booked'});
+    res.status(404).json({message:'Slot is already booked'});
   }
   const appointment = await Appointment.create({
     patient_id,
